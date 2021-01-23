@@ -34,17 +34,15 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/gtests/CMakeLists.txt")
     message(FATAL_ERROR "The googletest submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
 
-add_subdirectory(Adder)
+#ifdef (USE_ADDER)
+    add_subdirectory(Adder)
+    target_include_directories(${PROJECT_NAME} 
+                            PUBLIC Adder)
+    target_link_libraries(${PROJECT_NAME} adder)
+#endif
+
+
 #add_subdirectory(external/glfw)
-
-
-target_include_directories(${PROJECT_NAME} 
-                        PUBLIC Adder)
- #                       PUBLIC external/gtests/googletest/include)
-
-target_link_libraries(${PROJECT_NAME} adder)
-
-
 add_subdirectory(Example)
 
 ############ For google tests ######

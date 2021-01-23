@@ -1,8 +1,9 @@
 #include <iostream>
-// #ifdef USE_ADDER
-	#include <adder.hpp>
-// #endif
 #include <cmaketutorial_config.h>
+
+#ifdef USE_ADDER
+	#include <adder.hpp>
+#endif
 
 int main(int argc, char* argv[]){
 	std::cout << argv[0] << " Version " << CMAKETUTORIAL_VERSION_MAJOR << "." << CMAKETUTORIAL_VERSION_MINOR << std::endl;
