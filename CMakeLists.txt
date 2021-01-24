@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.10.1)
 
 project(cmaketutorial VERSION 1.0)
 
+find_library(myglewlib glew NAMES glew2 GLEW GLEW2 DOC 'glew library')
+
+if(${myglewlib}) # or : if(${myglewlib} STREQUAL myglewlib-NOTFOUND)
+    message(FATAL_ERROR 'no glew')
+else()
+    message(STATUS "glew found! as ${myglewlib}")
+endif()
+
+
 configure_file(cmaketutorial_config.h.in cmaketutorial_config.h)
 
 add_executable(${PROJECT_NAME} main.cpp)
@@ -50,6 +59,9 @@ enable_testing()
 add_subdirectory(external/gtests)
 add_subdirectory(test)
 
+target_link_libraries(${PROJECT_NAME} 
+                      ${myglewlib}
+                     )
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/cmaketutorial_config.h DESTINATION include)
